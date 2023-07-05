@@ -17,7 +17,7 @@
 
    <!-- Choose visualization -->
    <arg name="rviz" default="true" />
-   <arg name="rtabmap_viz" default="false" />
+   <arg name="rtabmap_viz" default="true" />
    <arg name="local_bundle" default="true" />
    <arg name="stereo_sync" default="false" />
 

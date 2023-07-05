@@ -26,21 +26,21 @@
          $ roslaunch rtabmap_demos demo_turtlebot_mapping.launch simulation:=true
          $ roslaunch rtabmap_demos demo_turtlebot_rviz.launch
   -->
-
+  
   <arg name="database_path"     default="rtabmap.db"/>
   <arg name="rgbd_odometry"     default="false"/>
-  <arg name="rtabmap_viz"        default="false"/>
+  <arg name="rtabmap_viz"        default="true"/>
   <arg name="localization"      default="false"/>
-  <arg name="simulation"        default="false"/>
+  <arg name="simulation"        default="true"/>
   <arg name="sw_registered"     default="false"/>
   <arg     if="$(arg localization)" name="args"  default=""/>
   <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
 
-  <arg     if="$(arg simulation)" name="rgb_topic"   default="/camera/rgb/image_raw"/>
-  <arg unless="$(arg simulation)" name="rgb_topic"   default="/camera/rgb/image_rect_color"/>
-  <arg     if="$(arg simulation)" name="depth_topic" default="/camera/depth/image_raw"/>
-  <arg unless="$(arg simulation)" name="depth_topic" default="/camera/depth_registered/image_raw"/>
-  <arg name="camera_info_topic" default="/camera/rgb/camera_info"/>
+  <arg     if="$(arg simulation)" name="rgb_topic"   default="rgb/image_raw"/>
+  <arg unless="$(arg simulation)" name="rgb_topic"   default="rgb/image_rect_color"/>
+  <arg     if="$(arg simulation)" name="depth_topic" default="depth/image_raw"/>
+  <arg unless="$(arg simulation)" name="depth_topic" default="depth_registered/image_raw"/>
+  <arg name="camera_info_topic" default="rgb/camera_info"/>
 
   <arg name="wait_for_transform"  default="0.2"/>
   <!--
@@ -49,14 +49,14 @@
   -->
 
   <!-- Navigation stuff (move_base) -->
-  <include unless="$(arg simulation)" file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+  <!-- <include unless="$(arg simulation)" file="$(find turtlebot_bringup)/launch/3dsensor.launch">
      <arg     if="$(arg sw_registered)" name="depth_registration" value="false"/>
      <arg unless="$(arg sw_registered)" name="depth_registration" value="true"/>
-  </include>
-  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+  </include> -->
+  <!-- <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/> -->
 
   <!-- Mapping -->
-  <group ns="rtabmap">
+  <group ns="camera">
 
     <node name="rtabmap" pkg="rtabmap_slam" type="rtabmap" output="screen" args="$(arg args)">
 	  <param name="database_path"       type="string" value="$(arg database_path)"/>

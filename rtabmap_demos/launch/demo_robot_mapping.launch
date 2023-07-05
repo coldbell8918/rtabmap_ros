@@ -10,7 +10,7 @@
   <arg name="rviz" default="false" />
   <arg name="rtabmap_viz" default="true" />
 
-  <param name="use_sim_time" type="bool" value="True"/>
+  <param name="use_sim_time" type="bool" value="true"/>
 
   <!-- Localization-only mode -->
   <arg name="localization"      default="false"/>
